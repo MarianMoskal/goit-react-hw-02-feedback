@@ -15,28 +15,31 @@ class App extends Component {
   keyNames = Object.keys(this.state);
 
   onLeaveFeedback = (e) => {
-    const { className } = e.target;
+    const { id } = e.target;
+    this.setState((state) => ({ [id]: state[id] + 1 }));
+  };
 
-    if (className.includes("goodBtn")) {
-      this.setState((state) => ({ good: state.good + 1 }));
-    }
-    if (className.includes("neutralBtn")) {
-      this.setState((state) => ({ neutral: state.neutral + 1 }));
-    }
-    if (className.includes("badBtn")) {
-      this.setState((state) => ({ bad: state.bad + 1 }));
-    }
+  countTotal = (state) => {
+    const { good, neutral, bad } = state;
+    let result = good + neutral + bad;
+    return result;
+  };
+
+  countPositivePercentage = (good, total) => {
+    return Number(Math.round((good / total) * 100));
   };
 
   render() {
-    const { state, keyNames, onLeaveFeedback } = this;
-    const { good, neutral, bad } = state;
-    const total = good + neutral + bad;
-    const positivePercentage = Number(Math.round((good / total) * 100));
+    const { good, neutral, bad } = this.state;
+    const total = this.countTotal(this.state);
+    const positivePercentage = this.countPositivePercentage(good, total);
 
     return (
       <Section title="Please leave feedback">
-        <FeedbackOptions name={keyNames} eventHandler={onLeaveFeedback} />
+        <FeedbackOptions
+          name={this.keyNames}
+          eventHandler={this.onLeaveFeedback}
+        />
         <Statistics
           good={good}
           neutral={neutral}
