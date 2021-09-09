@@ -29,16 +29,14 @@ class App extends Component {
   };
 
   render() {
-    const { good, neutral, bad } = this.state;
+    const { state, keyNames, onLeaveFeedback } = this;
+    const { good, neutral, bad } = state;
     const total = good + neutral + bad;
     const positivePercentage = Number(Math.round((good / total) * 100));
 
     return (
       <Section title="Please leave feedback">
-        <FeedbackOptions
-          name={this.keyNames}
-          eventHandler={this.onLeaveFeedback}
-        />
+        <FeedbackOptions name={keyNames} eventHandler={onLeaveFeedback} />
         <Statistics
           good={good}
           neutral={neutral}

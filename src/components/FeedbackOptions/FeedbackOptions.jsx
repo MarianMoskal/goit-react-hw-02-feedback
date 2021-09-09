@@ -1,4 +1,5 @@
 import { Button } from "./FeedbackOptions.styled";
+import PropTypes from "prop-types";
 
 function FeedbackOptions(props) {
   const { eventHandler, name } = props;
@@ -16,5 +17,9 @@ function FeedbackOptions(props) {
     </>
   );
 }
+FeedbackOptions.propTypes = {
+  name: PropTypes.arrayOf(PropTypes.string).isRequired,
+  eventHandler: PropTypes.func,
+};
 
 export default FeedbackOptions;

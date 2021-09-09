@@ -1,4 +1,5 @@
 import { Container, Paragraf } from "./Statistics.styled";
+import PropTypes from "prop-types";
 
 function Statistics(p) {
   const { good, neutral, bad, total, positivePercentage } = p;
@@ -19,5 +20,13 @@ function Statistics(p) {
     </Container>
   );
 }
+
+Statistics.propTypes = {
+  good: PropTypes.number,
+  neutral: PropTypes.number,
+  bad: PropTypes.number,
+  total: PropTypes.number,
+  positivePercentage: PropTypes.number,
+};
 
 export default Statistics;
