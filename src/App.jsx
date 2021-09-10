@@ -19,20 +19,19 @@ class App extends Component {
     this.setState((state) => ({ [id]: state[id] + 1 }));
   };
 
-  countTotal = (state) => {
-    const { good, neutral, bad } = state;
-    let result = good + neutral + bad;
-    return result;
+  countTotal = () => {
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;
   };
 
-  countPositivePercentage = (good, total) => {
-    return Number(Math.round((good / total) * 100));
+  countPositivePercentage = () => {
+    return Number(Math.round((this.state.good / this.countTotal()) * 100));
   };
 
   render() {
     const { good, neutral, bad } = this.state;
-    const total = this.countTotal(this.state);
-    const positivePercentage = this.countPositivePercentage(good, total);
+    const total = this.countTotal();
+    const positivePercentage = this.countPositivePercentage();
 
     return (
       <Section title="Please leave feedback">
